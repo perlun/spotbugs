@@ -75,3 +75,8 @@ jobs:
           ./gradlew spotlessCheck build smoketest ${SONAR_LOGIN:+sonarqube} --no-daemon "-Dsonar.login=$SONAR_LOGIN" --scan
         env:
           SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: my-artifact
+          path: spotbugsTestCases/build/classes/java/java17/PatternMatchingForSwitch.class
